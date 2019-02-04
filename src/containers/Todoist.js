@@ -17,7 +17,8 @@ export default class App extends React.Component {
             this.createTask("Задача 2"),
             this.createTask("Задача 3"),
             this.createTask("Задача 4"),
-        ]
+        ],
+        createItemTask: '',
     }
 
     createTask(name) {
@@ -88,6 +89,30 @@ export default class App extends React.Component {
         }) 
     }
     
+    addItemTask = (e) => {
+        
+        e.preventDefault()
+
+        this.setState( ({tasks}) => {
+            return {
+                tasks: [
+                    ...tasks,
+                    this.createTask(this.state.createItemTask)   
+                ],
+                createItemTask: ''
+            }
+        }) 
+    }
+
+    addInputChange = (name) => {   
+        this.setState((state) => {
+            return {
+                createItemTask: name
+            }
+        })
+    }
+
+
 
     render()  {
         return (
@@ -113,7 +138,11 @@ export default class App extends React.Component {
                               deleteItemHandler={ (id) => this.deleteItemHandler(id)}
                      />
                 </div>
-                <AddItem />        
+                <AddItem 
+                    input={this.state.createItemTask}
+                    addInputChange={(name) => this.addInputChange(name)}
+                    addItemTask={this.addItemTask}
+                />        
             </React.Fragment>)
     }
 }

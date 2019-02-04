@@ -1,15 +1,24 @@
 import React from 'react'
 
-const AddItem = (props) => {
+
+const AppCount = (props) => {
     return (
-        <div className="input-group">
-            <input type="text" className="form-control" placeholder="Введите задачу" />
+        <form   className="input-group"
+                onSubmit={props.addItemTask}>
+            <input  type="text" 
+                    className="form-control" 
+                    placeholder="Введите задачу" 
+                    value={props.input}
+                    onChange={(e) => props.addInputChange(e.target.value)}
+            />
             <div className="input-group-append">
-                <button className="btn btn-outline-success" type="button">Добавить</button>
+                <button className="btn btn-outline-success" 
+                        type="submit"
+                        disabled={!props.input}
+                >Добавить</button>
             </div>
-        </div>
+        </form>
     )
 }
 
-export default AddItem
-
+export default AppCount
