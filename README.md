@@ -2,9 +2,7 @@
 
 Приложение Todo List 
 
-[Демо](//pre.zn-work.ru/react/2019/todoist)
-
-## Available Scripts
+[Демо](http://pre.zn-work.ru/react/2019/todoist)
 
 Запуск
 
