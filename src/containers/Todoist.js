@@ -1,6 +1,6 @@
 import React from 'react'
 
-import TodoList from '../components/TodoList/TodoList'
+import TodoList from '../containers/TodoList/TodoList'
 import AppHeader from '../components/AppHeader/AppHeader'
 import SearchPanel from '../components/SearchPanel/SearchPanel'
 import AppFilter from '../components/AppFilter/AppFilter'
@@ -9,7 +9,25 @@ import AppCount from '../components/AppCount/AppCount'
 
 export default class App extends React.Component { 
 
-  
+    taskId = 100
+
+    state = {
+        tasks: [
+            this.createTask("Задача 1"),
+            this.createTask("Задача 2"),
+            this.createTask("Задача 3"),
+            this.createTask("Задача 4"),
+        ]
+    }
+
+    createTask(name) {
+        return {
+            name,
+            important: false,
+            done: false,
+            id: this.taskId++
+        }
+    }
 
     render()  {
         return (
@@ -29,7 +47,7 @@ export default class App extends React.Component {
                     </div>
                 </div>
                 <div className="mb-3">
-                    <TodoList />
+                    <TodoList tasks={this.state.tasks} />
                 </div>
                 <AddItem />        
             </React.Fragment>)
