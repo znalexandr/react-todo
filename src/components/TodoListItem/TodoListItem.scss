@@ -1,5 +1,16 @@
 .todo-item {
     &__name {
         cursor: pointer; 
+        user-select: none;
+        flex-grow: 1;
+
+        &.important {
+            font-weight: bold;
+        }
+
+        &.done {
+            text-decoration: line-through;
+            color:#858585
+        }
     }
 }

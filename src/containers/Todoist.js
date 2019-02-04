@@ -22,12 +22,72 @@ export default class App extends React.Component {
 
     createTask(name) {
         return {
-            name,
+            name, 
             important: false,
             done: false,
             id: this.taskId++
         }
     }
+
+    toggleProperty(arr, id, propName) {
+        // 1. обновить объект
+            // поиск индекса по значению в объекте
+            const idx = arr.findIndex( (el) => el.id === id ) 
+
+            // старый элемент массива
+            const oldItem = arr[idx]; 
+
+            // создаем новый элемент (не мутирая старый)
+            const newItem = {...oldItem, [propName]: !oldItem[propName]}
+
+        // 2. создать новый массив
+
+            return  [
+                ...arr.slice(0, idx),
+                newItem,
+                ...arr.slice(idx + 1)
+                
+            ]
+    } 
+
+    changeDoneHandler = (id) => {
+        this.setState( ({tasks}) => {
+            return {
+                tasks: this.toggleProperty(tasks, id, 'done')
+            }
+        })
+        
+    }
+
+    changeImportantHandler = (id) => {
+        this.setState( ({tasks}) => {
+            return {
+                tasks: this.toggleProperty(tasks, id, 'important')
+            }
+        })  
+    }
+
+    deleteItemHandler = (id) => {
+        this.setState( ({tasks}) => {
+
+            // 1. обновить объект
+            // поиск индекса по значению в объекте
+            const idx = tasks.findIndex( (el) => el.id === id ) 
+
+            // 2. создать новый массив
+
+            const newArray = [
+                ...tasks.slice(0, idx),
+                ...tasks.slice(idx + 1)
+                
+            ]
+
+            return {
+                tasks: newArray
+            }
+        }) 
+    }
+    
 
     render()  {
         return (
@@ -47,7 +107,11 @@ export default class App extends React.Component {
                     </div>
                 </div>
                 <div className="mb-3">
-                    <TodoList tasks={this.state.tasks} />
+                    <TodoList tasks={this.state.tasks}
+                              changeDoneHandler={ (id) => this.changeDoneHandler(id)}
+                              changeImportantHandler={ (id) => this.changeImportantHandler(id)}
+                              deleteItemHandler={ (id) => this.deleteItemHandler(id)}
+                     />
                 </div>
                 <AddItem />        
             </React.Fragment>)
