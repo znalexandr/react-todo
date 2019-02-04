@@ -4,7 +4,7 @@ import React from 'react'
 const AppCount = (props) => {
     return (
         <div>
-            3 активных, 5 выполеных
+            {props.active} активных, {props.done} выполеных
         </div>
     )
 }

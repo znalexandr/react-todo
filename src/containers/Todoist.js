@@ -13,12 +13,13 @@ export default class App extends React.Component {
 
     state = {
         tasks: [
-            this.createTask("Задача 1"),
-            this.createTask("Задача 2"),
-            this.createTask("Задача 3"),
-            this.createTask("Задача 4"),
+            this.createTask("Привет"),
+            this.createTask("Мир!"),
+            this.createTask("Задача"),
+            this.createTask("Task"),
         ],
         createItemTask: '',
+        search: '',
     }
 
     createTask(name) {
@@ -90,7 +91,7 @@ export default class App extends React.Component {
     }
     
     addItemTask = (e) => {
-        
+
         e.preventDefault()
 
         this.setState( ({tasks}) => {
@@ -112,27 +113,54 @@ export default class App extends React.Component {
         })
     }
 
+    viewItems = (arr) => {
+        const res = arr.filter( (item) => {
 
+            const name = item.name.toLowerCase()
+            const search = this.state.search.toLowerCase()
 
-    render()  {
+            return name.indexOf(search) > -1
+        })
+
+        return res
+    }
+
+    handleSearch = (val) => {
+        this.setState(({search}) => {
+            return {
+                search: val
+            }
+        })
+    }
+
+    render = () =>  {
+        
+        const doneCount = this.state.tasks.filter((el) => el.done).length
+        const activeCount = this.state.tasks.length - doneCount 
+
+        const tasks = this.viewItems(this.state.tasks)
+
         return (
             <React.Fragment>
                 <div className="mb-2">
                     <AppHeader />
                 </div> 
                 <div className="mb-3">
-                    <AppCount />
+                    <AppCount done={+doneCount} active={+activeCount} />
                 </div>
                 <div className="row no-gutters mb-3">
                     <div className="col-lg-6 pr-lg-2 mb-lg-0 mb-3">
-                        <SearchPanel />
+                        <SearchPanel 
+                            onSearch={(name) => this.handleSearch(name)}
+                            search={this.state.search}
+                        />
                     </div>
                     <div className="col-lg-6 text-center">
                         <AppFilter />
                     </div>
                 </div>
                 <div className="mb-3">
-                    <TodoList tasks={this.state.tasks}
+                    <TodoList tasks={tasks}
                               changeDoneHandler={ (id) => this.changeDoneHandler(id)}
                               changeImportantHandler={ (id) => this.changeImportantHandler(id)}
                               deleteItemHandler={ (id) => this.deleteItemHandler(id)}
