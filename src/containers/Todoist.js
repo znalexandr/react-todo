@@ -20,6 +20,7 @@ export default class App extends React.Component {
         ],
         createItemTask: '',
         search: '',
+        filterTask: false,
     }
 
     createTask(name) {
@@ -100,7 +101,8 @@ export default class App extends React.Component {
                     ...tasks,
                     this.createTask(this.state.createItemTask)   
                 ],
-                createItemTask: ''
+                createItemTask: '',
+                filterTask: false,
             }
         }) 
     }
@@ -113,13 +115,20 @@ export default class App extends React.Component {
         })
     }
 
-    viewItems = (arr) => {
+    viewItems = (arr, action = false) => {
+        
         const res = arr.filter( (item) => {
 
             const name = item.name.toLowerCase()
             const search = this.state.search.toLowerCase()
 
-            return name.indexOf(search) > -1
+            if(action === "active") {
+                return (name.indexOf(search) > -1) && !item.done
+            } else if(action === "done") {
+                return (name.indexOf(search) > -1) && item.done
+            } else {
+                return name.indexOf(search) > -1
+            }
         })
 
         return res
@@ -132,13 +141,22 @@ export default class App extends React.Component {
             }
         })
     }
+    
+    filterBtnChange = (action) => {
+        this.setState(({filterTask}) => {
+            return {
+                filterTask: action
+            }
+        })
+    }
+
 
     render = () =>  {
         
         const doneCount = this.state.tasks.filter((el) => el.done).length
         const activeCount = this.state.tasks.length - doneCount 
 
-        const tasks = this.viewItems(this.state.tasks)
+        const tasks = this.viewItems(this.state.tasks, this.state.filterTask)
 
         return (
             <React.Fragment>
@@ -151,12 +169,13 @@ export default class App extends React.Component {
                 <div className="row no-gutters mb-3">
                     <div className="col-lg-6 pr-lg-2 mb-lg-0 mb-3">
                         <SearchPanel 
-                            onSearch={(name) => this.handleSearch(name)}
+                            handleSearch={(name) => this.handleSearch(name)}
                             search={this.state.search}
                         />
                     </div>
                     <div className="col-lg-6 text-center">
-                        <AppFilter />
+                        <AppFilter  filterTask={this.state.filterTask}
+                                    filterBtnChange={(action) => this.filterBtnChange(action)} />
                     </div>
                 </div>
                 <div className="mb-3">

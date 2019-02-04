@@ -5,7 +5,7 @@ const SearchPanel = (props) => {
         <div>
             <input className="form-control"
                     placeholder="Поиск..."
-                    onChange={(e) => props.onSearch(e.target.value)}
+                    onChange={(e) => props.handleSearch(e.target.value)}
                     value={props.search} />
         </div>
     )
