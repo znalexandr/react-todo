@@ -1,24 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Layout from './HOC/Layout/Layout'
+import Todoist from './containers/Todoist'
 
-import TodoList from './components/TodoList'
-import AppHeader from './components/AppHeader'
-import SearchPanel from './components/SearchPanel'
+const App = () => <Layout><Todoist /></Layout>; 
 
-class App extends React.Component {
-    render = () => (
-        <React.Fragment>
-            <section className="py-5">
-                <div className="container">
-                    <AppHeader />
-                    <SearchPanel />
-                    <TodoList />
-                </div>
-            </section>
-        </React.Fragment>
-    )
-}
-
-
-
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App/>, document.getElementById('root'));
