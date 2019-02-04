@@ -8,7 +8,7 @@ export default class Layout extends Component{
                 <main className="py-5">
                     <div className="container">
                         <div className="row justify-content-center">
-                            <div className="col-md-6">
+                            <div className="col-md-8 col-xl-6">
                                 {this.props.children}
                             </div>
                         </div>

@@ -4,7 +4,7 @@ const SearchPanel = (props) => {
     return(
         <div>
             <input className="form-control"
-                    placeholder="Поиск" />
+                    placeholder="Поиск..." />
         </div>
     )
 }
