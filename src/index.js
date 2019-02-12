@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Layout from './HOC/Layout/Layout'
-import Todoist from './containers/Todoist'
+import Todoist from './pages/Todoist'
 
 const App = () => <Layout><Todoist /></Layout>; 
 
