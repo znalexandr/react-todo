@@ -9,7 +9,8 @@ import AppFilter from '../components/AppFilter/AppFilter'
 import AddItem from '../components/AddItem/AddItem' 
 import AppCount from '../components/AppCount/AppCount' 
 
-
+/** @jsx jsx */
+import { jsx } from '@emotion/core'
 
 export default class App extends React.Component { 
     render = () =>  {
@@ -35,6 +36,15 @@ export default class App extends React.Component {
                         <TodoList />
                     </div>
                     <AddItem />
+                    <div className="mt-5">
+                        <div  css={{
+                        margin: 0,
+                        fontSize: 18,
+                        color: '#fa2322',
+                        lineHeight: '1.5',
+                        fontFamily: 'Sans-Serif',
+                        }}>emotion</div>
+                    </div>
                 </Provider>     
             </React.Fragment>)
     }
