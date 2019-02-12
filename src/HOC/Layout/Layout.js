@@ -1,10 +1,13 @@
 import React, {Component} from 'react'
 import './Layout.scss'
 
+import Header from '../../components/_template/Header/Header'
+
 export default class Layout extends Component{
     render() {
         return(
             <React.Fragment>
+                <Header />
                 <main className="py-5">
                     <div className="container">
                         <div className="row justify-content-center">
