@@ -4,7 +4,6 @@ import { Subscribe } from 'unstated'
 import TodoistContainer from '../../containers/TodoistContainer'
 
 const AppCount = () => {
-    
     return (
         <Subscribe to={[TodoistContainer]}>
             {TodoistContainer => {
@@ -28,8 +27,7 @@ const AppCount = () => {
                 )
             }}
         </Subscribe>
-    )
-    
+    )    
 }
 
 export default AppCount

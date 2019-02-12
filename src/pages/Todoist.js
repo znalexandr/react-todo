@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Provider} from 'unstated'
+import { Provider } from 'unstated'
 
 import TodoList from '../components/TodoList/TodoList'
 import AppHeader from '../components/AppHeader/AppHeader'
